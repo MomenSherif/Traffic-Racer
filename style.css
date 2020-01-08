@@ -203,13 +203,32 @@
 }
 
 /* //////////////////////////////////////////// */
-
-#container{
+#raceSec
+{
     display: none;
+    width: 100%;
+    height: 113%;
+    padding: 23px;
+    background: linear-gradient(
+      60deg,
+      hsl(224, 85%, 66%),
+      hsl(269, 85%, 66%),
+      hsl(314, 85%, 66%),
+      hsl(359, 85%, 66%),
+      hsl(44, 85%, 66%),
+      hsl(89, 85%, 66%),
+      hsl(134, 85%, 66%),
+      hsl(179, 85%, 66%)
+    );
+    background-size: 300% 300%;
+    background-position: 0 50%;
+    animation: moveGradient 4s alternate infinite;
+}
+#container{
     position: relative;
     height: 90vh;
     width: 25%;
-    left: 35%;
+    left: 25%;
     margin-top: 20px;;
     background-color: #292929;
     overflow: hidden;
@@ -229,6 +248,31 @@
 }
 #line_3{
     top: 450px;
+}
+#line_4,#line_5,#line_6
+{
+  left:25%;
+}
+#line_4
+{
+  top: -150px;
+}
+
+#line_5
+{
+  top: 150px;
+}
+#line_6
+{
+  top: 450px;
+}
+#lines
+{
+  display: none;
+}
+.road
+{
+  left: -14%;
 }
 .car{
     position: absolute;
@@ -340,7 +384,7 @@
     position: fixed;
     background-color: rgba(0,0,0,0.5);
     top: 50%;
-    padding: 100px;
+    padding: 75px;
 }
 #plData-1 p,#plData-2 p
 {

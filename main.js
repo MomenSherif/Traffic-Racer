@@ -1,6 +1,7 @@
 Splitting();
 let currentPlayer = 1;
 let players = [];
+let audio = new Audio('air.mp3');
 const Player = function(name,color)
 {
     this.Playername = name;
@@ -59,6 +60,18 @@ $('#btn-start').on('click',function()
     {
         $(".players-sec").css('display','none');   
         $("#raceSec").css('display','block');
+        let distance = 11;
+        let x = setInterval(function() 
+       {
+         distance -= 1;
+         $('#count').text(distance);
+         if (distance < 0) 
+            {
+            $('#count').text('');
+            audio.play();
+            clearInterval(x);
+            }
+        },1000);
         if(count > 1)
         {
             $("#container").css('width',50+"%");
@@ -97,7 +110,8 @@ const data = {
       down: true
     }
   }
-  
+  audio.addEventListener('ended',function()
+  {
   Car.prototype.moveLeft = function () {
     this.el.css('left', `-=${data.carSpeed}`);
     this.ableToMove.left = requestAnimationFrame(this.moveLeft.bind(this));
@@ -182,3 +196,4 @@ const data = {
     }
   
   });
+});

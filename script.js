@@ -54,8 +54,8 @@ Car.prototype.stopDown = function () {
 }
 
 
-const car = new Car('#car');
-const car2 = new Car('#car2');
+const car = new Car('#car-1');
+const car2 = new Car('#car-2');
 
 $(document).on('keydown', function (e) {
   if (e.keyCode === 37 && car.ableToMove.left === true) {

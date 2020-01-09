@@ -1,3 +1,77 @@
+var speed=4;
+var car=$('.car');
+var car_1=$('#car_1');
+var car_2=$('#car_2');
+var car_3=$('#car_3');
+var car_4=$('#car_4');
+var car_5=$('#car_5');
+var car_6=$('#car_6');
+var container=$('#container');
+var container_width;
+var container_height=parseInt(container.height());
+var car_width=parseInt(car.width());
+var anim_id;
+var car_left;
+var containerAmount;
+var randomTracker = [];
+function repeat()
+{ 
+    car_down(car_1);
+    car_down(car_2);
+    car_down(car_3);
+    car_down(car_4);
+    car_down(car_5);
+    car_down(car_6);
+    anim_id=requestAnimationFrame(repeat);
+}
+//for random
+function existingNum() {
+  for (var i = 0; i < randomTracker.length; i++) {
+    if (randomTracker[i] === car_left) {
+      return true;
+    }
+    else
+    {       debugger;
+            
+                var res=Math.abs(randomTracker[i]-car_left);
+                if(res<(car_width+10))
+                {
+                  return true;
+                }
+             
+    }
+  }
+  return false;
+}
+//
+function car_down(car)
+{
+    var current_top=parseInt(car.css('top'));
+    if(current_top>container_height)
+    {
+        current_top=-200;
+        debugger;
+        //for random
+            do {
+              car_left=parseInt(Math.random()*(container_width-(car_width+10)));
+            } while (existingNum());
+            if(randomTracker.length<containerAmount)
+            {
+              randomTracker.push(car_left);
+            }
+            else{
+              randomTracker=[];
+              randomTracker.push(car_left);
+            }
+            
+            car.css('left',car_left);
+            //
+        
+       
+    }
+    car.css('top',current_top+speed);
+}
+///////////////////////////////////////////////////////
 Splitting();
 let currentPlayer = 1;
 let players = [];
@@ -70,12 +144,23 @@ $('#btn-start').on('click',function()
             $('#count').text('');
             audio.play();
             clearInterval(x);
+            clearInterval(x);
+            //
+            anim_id=requestAnimationFrame(repeat);
+            //
             }
         },1000);
         if(count > 1)
         {
             $("#container").css('width',50+"%");
             $('#car-2').css('display','block');
+                      //
+                      container_width=parseInt(container.css('width'));
+                      car_4.css('display','block');
+                      car_5.css('display','block');
+                      car_6.css('display','block');
+                      containerAmount=6;
+                      //
             $('#lines').css('display','block');
             $('#plData-2').css('display','block');
             $('.R1').addClass('road');
@@ -90,6 +175,10 @@ $('#btn-start').on('click',function()
             $('#car-1').css('background-color',players[0].favColor);
             $('#plData-1').find('p').text(players[0].Playername);
             $("#container").css('left',40+"%");
+                     //
+                     containerAmount=3;
+                     container_width=parseInt(container.css('width'));
+                     //
         }
 
     }

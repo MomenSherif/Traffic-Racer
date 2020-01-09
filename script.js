@@ -4,8 +4,10 @@ const data = {
   lineSpeed:5
 }
 
-const Car = function (selector) {
+const Car = function (selector, container) {
   this.el = $(selector);
+  this.container = $(container);
+
   this.ableToMove = {
     left: true,
     right: true,
@@ -15,12 +17,10 @@ const Car = function (selector) {
 }
 
 Car.prototype.moveLeft = function () {
-  this.el.css('left', `-=${data.carSpeed}`);
-  if(collisionHappened($('#car-1'), $('#car-2'))) {
-    console.log('Collision!');
+  if (parseInt(this.el.css('left')) > 10) {
+    this.el.css('left', `-=${data.carSpeed}`);
+    this.ableToMove.left = requestAnimationFrame(this.moveLeft.bind(this));
   }
-  this.ableToMove.left = requestAnimationFrame(this.moveLeft.bind(this));
-
 }
 
 Car.prototype.stopLeft = function () {
@@ -29,11 +29,10 @@ Car.prototype.stopLeft = function () {
 }
 
 Car.prototype.moveRight = function () {
-  this.el.css('left', `+=${data.carSpeed}`);
-  if(collisionHappened($('#car-1'), $('#car-2'))) {
-    console.log('Collision!');
+  if (parseInt(this.el.css('left')) < this.container.width() - this.el.width() - 10) {
+    this.el.css('left', `+=${data.carSpeed}`);
+    this.ableToMove.right = requestAnimationFrame(this.moveRight.bind(this));
   }
-  this.ableToMove.right = requestAnimationFrame(this.moveRight.bind(this));
 }
 
 Car.prototype.stopRight = function () {
@@ -42,11 +41,10 @@ Car.prototype.stopRight = function () {
 }
 
 Car.prototype.moveUp = function () {
-  this.el.css('top', `-=${data.carSpeed}`);
-  if(collisionHappened($('#car-1'), $('#car-2'))) {
-    console.log('Collision!');
+  if (parseInt(this.el.css('top')) > 10) {
+    this.el.css('top', `-=${data.carSpeed}`);
+    this.ableToMove.up = requestAnimationFrame(this.moveUp.bind(this));
   }
-  this.ableToMove.up = requestAnimationFrame(this.moveUp.bind(this));
 }
 
 Car.prototype.stopUp = function () {
@@ -55,11 +53,10 @@ Car.prototype.stopUp = function () {
 }
 
 Car.prototype.moveDown = function () {
-  this.el.css('top', `+=${data.carSpeed}`);
-  if(collisionHappened($('#car-1'), $('#car-2'))) {
-    console.log('Collision!');
+  if (parseInt(this.el.css('top')) < this.container.height() - this.el.height() - 10) {
+    this.el.css('top', `+=${data.carSpeed}`);
+    this.ableToMove.down = requestAnimationFrame(this.moveDown.bind(this));
   }
-  this.ableToMove.down = requestAnimationFrame(this.moveDown.bind(this));
 }
 
 Car.prototype.stopDown = function () {
@@ -68,8 +65,8 @@ Car.prototype.stopDown = function () {
 }
 
 
-const car = new Car('#car-1');
-const car2 = new Car('#car-2');
+const car = new Car('#car-1', '#container');
+const car2 = new Car('#car-2','#container');
 
 
 
@@ -179,16 +176,16 @@ function collisionHappened(obj1, obj2) {
 
   // top-right corner of the car
   if (r1 >= l2 && r1 <= r2 && t1 >= t2 && t1 <= b2)
-      didCollide = true;
+    didCollide = true;
   // top-left corner of the car
   if (l1 >= l2 && l1 <= r2 && t1 >= t2 && t1 <= b2)
-      didCollide = true;
+    didCollide = true;
   // bottom-right corner of the car
   if (r1 >= l2 && r1 <= r2 && b1 >= t2 && b1 <= b2)
-      didCollide = true;
+    didCollide = true;
   // bottom-left corner of the car
   if (l1 >= l2 && l1 <= r2 && b1 >= t2 && b1 <= b2)
-      didCollide = true;
+    didCollide = true;
 
   return didCollide;
 }

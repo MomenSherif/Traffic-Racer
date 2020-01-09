@@ -13,7 +13,7 @@ body {
   left: 35%;
   margin-top: 20px;;
   background-color: #292929;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 .line{
   position: absolute;

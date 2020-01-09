@@ -1,5 +1,7 @@
 const data = {
   carSpeed: 5,
+  backgroundCarSpeed:3,
+  lineSpeed:5
 }
 
 const Car = function (selector, container) {
@@ -108,6 +110,50 @@ $(document).on('keyup', function (e) {
   }
 
 });
+
+//Animate background cars
+ requestAnimationFrame(backgroundMotion);
+
+    function backgroundMotion() {
+      $('.bg-cars').children().each(function(){
+        animateCars($(this));
+      })
+      $('.lines').children().each(function(){
+        animateLine($(this));
+      })   
+      requestAnimationFrame(backgroundMotion);    
+    }
+
+//move cars down
+function animateCars(carSelector) {
+  var carTopPosition = parseInt($(carSelector).css('top'));
+
+  if (carTopPosition > (parseInt($('#container').height()))) {
+    $(carSelector).css('top', -200);
+      var leftPosition = parseInt(Math.random() * (parseInt($('#container').width()) - parseInt($(carSelector).width())));
+      $(carSelector).css('left', leftPosition);
+  }
+  else{
+    $(carSelector).css('top', carTopPosition+data.backgroundCarSpeed);
+  }
+}
+
+//move line down
+function animateLine(lineSelector) {
+  var lineTopPosition = parseInt($(lineSelector).css('top'));
+  if (lineTopPosition > (parseInt($('#container').height()))) {
+    $(lineSelector).css('top', -200);
+  }
+  else{
+
+    $(lineSelector).css('top', lineTopPosition + data.lineSpeed);
+  }
+}
+
+
+
+
+
 
 
 

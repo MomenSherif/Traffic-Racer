@@ -124,17 +124,35 @@ body {
 }
 #car_1{
     top: -100px;
-    left: 60%;
+    left: 85%;
     background-color: #26c5ff;
 }
 #car_2{
     top: -200px;
-    left: 40%;
+    left: 70%;
     background-color: #26c5ff;
 }
 #car_3{
   top: -350px;
-  left: 50%;
+  left: 55%;
+  background-color: #26c5ff;
+ 
+}
+#car_4{
+  top: -250px;
+  left: 40%;
+  background-color: #26c5ff;
+ 
+}
+#car_5{
+  top: -300px;
+  left: 23%;
+  background-color: #26c5ff;
+ 
+}
+#car_6{
+  top: -100px;
+  left: 7%;
   background-color: #26c5ff;
  
 }
@@ -434,6 +452,9 @@ text-align: center;
 }
 #lines
 {
+  display: none;
+}
+#bg-cars{
   display: none;
 }
 .road

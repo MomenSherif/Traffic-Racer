@@ -77,6 +77,7 @@ $('#btn-start').on('click',function()
             $("#container").css('width',50+"%");
             $('#car-2').css('display','block');
             $('#lines').css('display','block');
+            $('#bg-cars').css('display','block');
             $('#plData-2').css('display','block');
             $('.R1').addClass('road');
             for(let i = 0; i < count; i++)

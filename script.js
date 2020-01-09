@@ -123,20 +123,20 @@ function existingNum() {
     }
     else
     {       debugger;
-            
+
                 var res=Math.abs(randomTracker[i]-car_left);
                 if(res<(car_width+10))
                 {
                   return true;
                 }
-             
+
     }
   }
   return false;
 }
 //
 //Animate background cars
- requestAnimationFrame(backgroundMotion);
+ requestAnimationFrame(backgroundMotion); // this lise needs to be called in [main.js line 81] only || MO'MEN :DD
 
     function backgroundMotion() {
       $('.bg-cars').children().each(function(){
@@ -144,8 +144,8 @@ function existingNum() {
       })
       $('.lines').children().each(function(){
         animateLine($(this));
-      })   
-      requestAnimationFrame(backgroundMotion);    
+      })
+      requestAnimationFrame(backgroundMotion);
     }
 
 //move cars down

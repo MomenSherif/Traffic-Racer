@@ -1,10 +1,10 @@
 const data = {
   carSpeed: 5,
+  backgroundCarSpeed:3
 }
 
 const Car = function (selector) {
   this.el = $(selector);
-
   this.ableToMove = {
     left: true,
     right: true,
@@ -16,6 +16,7 @@ const Car = function (selector) {
 Car.prototype.moveLeft = function () {
   this.el.css('left', `-=${data.carSpeed}`);
   this.ableToMove.left = requestAnimationFrame(this.moveLeft.bind(this));
+
 }
 
 Car.prototype.stopLeft = function () {
@@ -97,3 +98,27 @@ $(document).on('keyup', function (e) {
   }
 
 });
+
+//Animate background cars
+ requestAnimationFrame(carMotion);
+
+    function carMotion() {
+      $('.bg-cars').children().each(function(){
+        animateCars($(this));
+      })   
+      requestAnimationFrame(carMotion);    
+    }
+
+function animateCars(carSelector) {
+  var carTopPosition = parseInt($(carSelector).css('top'));
+
+  if (carTopPosition > (parseInt($('#container').height()) - parseInt($(carSelector).height()))) {
+    $(carSelector).css('top', -200);
+      var leftPosition = parseInt(Math.random() * (parseInt($('#container').width()) - parseInt($(carSelector).width())));
+      $(carSelector).css('left', leftPosition);
+  }
+  else{
+    $(carSelector).css('top', carTopPosition+data.backgroundCarSpeed);
+  }
+}
+

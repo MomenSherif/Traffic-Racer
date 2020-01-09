@@ -122,19 +122,20 @@ body {
   border-radius: 0px 5px 5px 0px;
 }
 #car_1{
-  top: -100px;
-  left: 60%;
-  background-color: #26c5ff;
+    top: -100px;
+    left: 60%;
+    background-color: #26c5ff;
 }
 #car_2{
-  top: -200px;
-  left: 40%;
-  background-color: #26c5ff;
+    top: -200px;
+    left: 40%;
+    background-color: #26c5ff;
 }
 #car_3{
   top: -350px;
   left: 50%;
   background-color: #26c5ff;
+ 
 }
 #restart_div {
   position: absolute;

@@ -207,6 +207,8 @@ text-align: center;
     align-items: center;
     padding: 7vmin;
 
+    /* display: none; */
+
   }
   .line1,
   .line2 {
@@ -447,14 +449,14 @@ text-align: center;
 }
 #car-1{
     bottom: 8%;
-    left: 60%;
+    left: 40%;
     background-color: #ffdf5a;
 }
 #car-2 {
-    left: 80%;
-    bottom: 8%;
+    left: 75%;
+    bottom: 40%;
     background-color: crimson;
-    display: none;
+    /* display: none; */
   }
 .f_glass{
     position: absolute;

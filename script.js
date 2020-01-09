@@ -16,6 +16,9 @@ const Car = function (selector) {
 
 Car.prototype.moveLeft = function () {
   this.el.css('left', `-=${data.carSpeed}`);
+  if(collisionHappened($('#car-1'), $('#car-2'))) {
+    console.log('Collision!');
+  }
   this.ableToMove.left = requestAnimationFrame(this.moveLeft.bind(this));
 
 }
@@ -27,6 +30,9 @@ Car.prototype.stopLeft = function () {
 
 Car.prototype.moveRight = function () {
   this.el.css('left', `+=${data.carSpeed}`);
+  if(collisionHappened($('#car-1'), $('#car-2'))) {
+    console.log('Collision!');
+  }
   this.ableToMove.right = requestAnimationFrame(this.moveRight.bind(this));
 }
 
@@ -37,6 +43,9 @@ Car.prototype.stopRight = function () {
 
 Car.prototype.moveUp = function () {
   this.el.css('top', `-=${data.carSpeed}`);
+  if(collisionHappened($('#car-1'), $('#car-2'))) {
+    console.log('Collision!');
+  }
   this.ableToMove.up = requestAnimationFrame(this.moveUp.bind(this));
 }
 
@@ -47,6 +56,9 @@ Car.prototype.stopUp = function () {
 
 Car.prototype.moveDown = function () {
   this.el.css('top', `+=${data.carSpeed}`);
+  if(collisionHappened($('#car-1'), $('#car-2'))) {
+    console.log('Collision!');
+  }
   this.ableToMove.down = requestAnimationFrame(this.moveDown.bind(this));
 }
 
@@ -58,6 +70,8 @@ Car.prototype.stopDown = function () {
 
 const car = new Car('#car-1');
 const car2 = new Car('#car-2');
+
+
 
 $(document).on('keydown', function (e) {
   if (e.keyCode === 37 && car.ableToMove.left === true) {
@@ -144,3 +158,37 @@ function animateLine(lineSelector) {
 
 
 
+
+
+/***************** Collision - Amr *******************/
+
+// The function takes two jQuery objects as arguments
+// up till now if there is a collision it will output in the console
+function collisionHappened(obj1, obj2) {
+  let didCollide = false;
+
+  let l1 = parseInt(obj1.css('left'));
+  let r1 = parseInt(obj1.css('left')) + parseInt(obj1.css('width'));
+  let t1 = parseInt(obj1.css('top'));
+  let b1 = parseInt(obj1.css('top')) + parseInt(obj1.css('height'));
+
+  let l2 = parseInt(obj2.css('left'));
+  let r2 = parseInt(obj2.css('left')) + parseInt(obj2.css('width'));
+  let t2 = parseInt(obj2.css('top'));
+  let b2 = parseInt(obj2.css('top')) + parseInt(obj2.css('height'));
+
+  // top-right corner of the car
+  if (r1 >= l2 && r1 <= r2 && t1 >= t2 && t1 <= b2)
+      didCollide = true;
+  // top-left corner of the car
+  if (l1 >= l2 && l1 <= r2 && t1 >= t2 && t1 <= b2)
+      didCollide = true;
+  // bottom-right corner of the car
+  if (r1 >= l2 && r1 <= r2 && b1 >= t2 && b1 <= b2)
+      didCollide = true;
+  // bottom-left corner of the car
+  if (l1 >= l2 && l1 <= r2 && b1 >= t2 && b1 <= b2)
+      didCollide = true;
+
+  return didCollide;
+}

@@ -1,3 +1,10 @@
+var car_4=$('#car_4');
+var car_5=$('#car_5');
+var car_6=$('#car_6');
+var container=$('#container');
+var container_width;
+var containerAmount;
+var anim_id;
 Splitting();
 let currentPlayer = 1;
 let players = [];
@@ -70,12 +77,22 @@ $('#btn-start').on('click',function()
             $('#count').text('');
             audio.play();
             clearInterval(x);
+                        //
+                        requestAnimationFrame(backgroundMotion);
+                        //
             }
         },1000);
         if(count > 1)
         {
             $("#container").css('width',50+"%");
             $('#car-2').css('display','block');
+            //
+            container_width=parseInt(container.css('width'));
+            car_4.css('display','block');
+            car_5.css('display','block');
+            car_6.css('display','block');
+            containerAmount=6;
+            //
             $('#lines').css('display','block');
             $('#plData-2').css('display','block');
             $('.R1').addClass('road');
@@ -90,6 +107,10 @@ $('#btn-start').on('click',function()
             $('#car-1').css('background-color',players[0].favColor);
             $('#plData-1').find('p').text(players[0].Playername);
             $("#container").css('left',40+"%");
+                        //
+                        containerAmount=3;
+                        container_width=parseInt(container.css('width'));
+                        //
         }
 
     }

@@ -531,19 +531,38 @@ text-align: center;
     border-radius: 0px 5px 5px 0px;
 }
 #car_1{
-    top: -100px;
-    left: 60%;
-    background-color: #26c5ff;
+  top: -100px;
+  left: 85%;
+  background-color: #26c5ff;
 }
 #car_2{
-    top: -200px;
-    left: 40%;
-    background-color: #26c5ff;
+  top: -220px;
+  left: 40%;
+  background-color: #26c5ff;
 }
 #car_3{
-    top: -350px;
-    left: 50%;
-    background-color: #26c5ff;
+  top: -350px;
+  left: 80%;
+  background-color: #26c5ff;
+  
+}
+#car_4{
+top: -410px;
+left: 70%;
+background-color: #26c5ff;
+display: none;
+}
+#car_5{
+top: -160px;
+left: 20%;
+background-color: #26c5ff;
+display: none;
+}
+#car_6{
+top: -290px;
+left: 30%;
+background-color: #26c5ff;
+display: none;
 }
 #plData-1,#plData-2
 {

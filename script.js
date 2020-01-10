@@ -1,3 +1,8 @@
+var main_car=$('.car');
+var car_left;
+var randomTracker = [];
+var container_height=parseInt(container.height());
+var car_width=parseInt(main_car.width());
 const data = {
   carSpeed: 5,
   backgroundCarSpeed:3,
@@ -110,9 +115,28 @@ $(document).on('keyup', function (e) {
   }
 
 });
+//for random
+function existingNum() {
+  for (var i = 0; i < randomTracker.length; i++) {
+    if (randomTracker[i] === car_left) {
+      return true;
+    }
+    else
+    {       debugger;
 
+                var res=Math.abs(randomTracker[i]-car_left);
+                if(res<(car_width+10))
+                {
+                  return true;
+                }
+
+    }
+  }
+  return false;
+}
+//
 //Animate background cars
- requestAnimationFrame(backgroundMotion);
+ requestAnimationFrame(backgroundMotion); // this lise needs to be called in [main.js line 81] only || MO'MEN :DD
 
     function backgroundMotion() {
       $('.bg-cars').children().each(function(){
@@ -120,8 +144,8 @@ $(document).on('keyup', function (e) {
       })
       $('.lines').children().each(function(){
         animateLine($(this));
-      })   
-      requestAnimationFrame(backgroundMotion);    
+      })
+      requestAnimationFrame(backgroundMotion);
     }
 
 //move cars down
@@ -130,8 +154,22 @@ function animateCars(carSelector) {
 
   if (carTopPosition > (parseInt($('#container').height()))) {
     $(carSelector).css('top', -200);
-      var leftPosition = parseInt(Math.random() * (parseInt($('#container').width()) - parseInt($(carSelector).width())));
-      $(carSelector).css('left', leftPosition);
+    //for random
+    do {
+      debugger;
+      car_left=parseInt(Math.random()*(container_width-(car_width+10)));
+    } while (existingNum());
+    if(randomTracker.length<containerAmount)
+    {
+      randomTracker.push(car_left);
+    }
+    else{
+      randomTracker=[];
+      randomTracker.push(car_left);
+    }
+    //
+      // var leftPosition = parseInt(Math.random() * (parseInt($('#container').width()) - parseInt($(carSelector).width())));
+      $(carSelector).css('left', car_left);
   }
   else{
     $(carSelector).css('top', carTopPosition+data.backgroundCarSpeed);

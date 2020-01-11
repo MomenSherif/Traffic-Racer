@@ -1,12 +1,12 @@
-var main_car=$('.car');
+var main_car = $('.car');
 var car_left;
 var randomTracker = [];
-var container_height=parseInt(container.height());
-var car_width=parseInt(main_car.width());
+var container_height = parseInt(container.height());
+var car_width = parseInt(main_car.width());
 const data = {
   carSpeed: 5,
-  backgroundCarSpeed:3,
-  lineSpeed:5
+  backgroundCarSpeed: 3,
+  lineSpeed: 5
 }
 
 const Car = function (selector, container) {
@@ -71,26 +71,26 @@ Car.prototype.stopDown = function () {
 
 
 const car = new Car('#car-1', '#container');
-const car2 = new Car('#car-2','#container');
+const car2 = new Car('#car-2', '#container');
 
 
 
 $(document).on('keydown', function (e) {
-  if (e.keyCode === 37 && car.ableToMove.left === true) {
+  if (car.ableToMove.left === true && e.keyCode === 37 && playable) {
     car.moveLeft();
-  } else if (e.keyCode === 39 && car.ableToMove.right === true) {
+  } else if (car.ableToMove.right === true && e.keyCode === 39 && playable) {
     car.moveRight();
-  } else if (e.keyCode === 38 && car.ableToMove.up === true) {
+  } else if (car.ableToMove.up === true && e.keyCode === 38 && playable) {
     car.moveUp();
-  } else if (e.keyCode === 40 && car.ableToMove.down === true) {
+  } else if (car.ableToMove.down === true && e.keyCode === 40 && playable) {
     car.moveDown();
-  } else if (e.keyCode === 65 && car2.ableToMove.left === true) {
+  } else if (car2.ableToMove.left === true && e.keyCode === 65 && playable) {
     car2.moveLeft();
-  } else if (e.keyCode === 68 && car2.ableToMove.right === true) {
+  } else if (car2.ableToMove.right === true && e.keyCode === 68 && playable) {
     car2.moveRight();
-  } else if (e.keyCode === 87 && car2.ableToMove.up === true) {
+  } else if (car2.ableToMove.up === true && e.keyCode === 87 && playable) {
     car2.moveUp();
-  } else if (e.keyCode === 83 && car2.ableToMove.down === true) {
+  } else if (car2.ableToMove.down === true && e.keyCode === 83 && playable) {
     car2.moveDown();
   }
 });
@@ -121,14 +121,12 @@ function existingNum() {
     if (randomTracker[i] === car_left) {
       return true;
     }
-    else
-    {       debugger;
+    else {
 
-                var res=Math.abs(randomTracker[i]-car_left);
-                if(res<(car_width+10))
-                {
-                  return true;
-                }
+      var res = Math.abs(randomTracker[i] - car_left);
+      if (res < (car_width + 10)) {
+        return true;
+      }
 
     }
   }
@@ -136,17 +134,15 @@ function existingNum() {
 }
 //
 //Animate background cars
- requestAnimationFrame(backgroundMotion); // this lise needs to be called in [main.js line 81] only || MO'MEN :DD
-
-    function backgroundMotion() {
-      $('.bg-cars').children().each(function(){
-        animateCars($(this));
-      })
-      $('.lines').children().each(function(){
-        animateLine($(this));
-      })
-      requestAnimationFrame(backgroundMotion);
-    }
+function backgroundMotion() {
+  $('.bg-cars').children().each(function () {
+    animateCars($(this));
+  })
+  $('.lines').children().each(function () {
+    animateLine($(this));
+  })
+  requestAnimationFrame(backgroundMotion);
+}
 
 //move cars down
 function animateCars(carSelector) {
@@ -156,23 +152,21 @@ function animateCars(carSelector) {
     $(carSelector).css('top', -200);
     //for random
     do {
-      debugger;
-      car_left=parseInt(Math.random()*(container_width-(car_width+10)));
+      car_left = parseInt(Math.random() * (container_width - (car_width + 10)));
     } while (existingNum());
-    if(randomTracker.length<containerAmount)
-    {
+    if (randomTracker.length < containerAmount) {
       randomTracker.push(car_left);
     }
-    else{
-      randomTracker=[];
+    else {
+      randomTracker = [];
       randomTracker.push(car_left);
     }
     //
-      // var leftPosition = parseInt(Math.random() * (parseInt($('#container').width()) - parseInt($(carSelector).width())));
-      $(carSelector).css('left', car_left);
+    // var leftPosition = parseInt(Math.random() * (parseInt($('#container').width()) - parseInt($(carSelector).width())));
+    $(carSelector).css('left', car_left);
   }
-  else{
-    $(carSelector).css('top', carTopPosition+data.backgroundCarSpeed);
+  else {
+    $(carSelector).css('top', carTopPosition + data.backgroundCarSpeed);
   }
 }
 
@@ -182,7 +176,7 @@ function animateLine(lineSelector) {
   if (lineTopPosition > (parseInt($('#container').height()))) {
     $(lineSelector).css('top', -200);
   }
-  else{
+  else {
 
     $(lineSelector).css('top', lineTopPosition + data.lineSpeed);
   }

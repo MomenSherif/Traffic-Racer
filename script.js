@@ -3,11 +3,17 @@ var car_left;
 var randomTracker = [];
 var container_height = parseInt(container.height());
 var car_width = parseInt(main_car.width());
+let bgAnimation;
 const data = {
   carSpeed: 5,
   backgroundCarSpeed: 3,
   lineSpeed: 5
 }
+
+audio.addEventListener('ended', function () {
+  bgAnimation = requestAnimationFrame(backgroundMotion);
+  playable = true;
+});
 
 const Car = function (selector, container) {
   this.el = $(selector);

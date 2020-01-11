@@ -4,7 +4,6 @@ var car_6 = $('#car_6');
 var container = $('#container');
 var container_width;
 var containerAmount;
-var anim_id;
 Splitting();
 let currentPlayer = 1;
 let players = [];
@@ -97,7 +96,4 @@ $('#btn-start').on('click', function () {
 
     }
 });
-audio.addEventListener('ended', function () {
-    requestAnimationFrame(backgroundMotion);
-    playable = true;
-});
+

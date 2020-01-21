@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var main_car = $('.car');
 var car_left;
 var randomTracker = [];
@@ -15,6 +16,101 @@ audio.addEventListener('ended', function () {
   playable = true;
 });
 
+=======
+Splitting();
+var playersCount = localStorage.getItem('count');
+var currPlayer = localStorage.getItem('currentPlayer');
+let players = JSON.parse(localStorage.getItem('players'));
+let audio = new Audio('air.mp3');
+let playable = false;
+var main_car = $('.car');
+var car_left;
+var randomTracker = [];
+var container = $('#container');
+var container_width;
+var containerAmount;
+var container_height = parseInt(container.height());
+var car_width = parseInt(main_car.width());
+let bgAnimation;
+let scoreInterval;
+var car_4 = $('#car_4');
+var car_5 = $('#car_5');
+var car_6 = $('#car_6');
+
+if (playersCount === currPlayer) {
+  console.log('Hello');
+  $("#raceSec").css('display', 'block');
+  let distance = 3;
+  let x = setInterval(function () {
+    distance -= 1;
+    $('#count').text(distance);
+    if (distance < 0) {
+      $('#count').text('');
+      audio.play();
+      clearInterval(x);
+
+    }
+  }, 1000);
+  if (playersCount > 1) {
+    $("#container").css('width', 50 + "%");
+    $('#car-2').css('display', 'block');
+    //
+    container_width = parseInt(container.css('width'));
+    car_4.css('display', 'block');
+    car_5.css('display', 'block');
+    car_6.css('display', 'block');
+    containerAmount = 6;
+    //
+    $('#lines').css('display', 'block');
+    $('#plData-2').css('display', 'block');
+    $('.R1').addClass('road');
+    for (let i = 0; i < playersCount; i++) {
+      $('#car-' + Number(i + 1)).css('background-color', players[i].favColor);
+      $('#plData-' + Number(i + 1)).find('p').text(players[i].Playername);
+    }
+  }
+  else {
+    $('#car-1').css('background-color', players[0].favColor);
+    $('#plData-1').find('p').text(players[0].Playername);
+    $("#container").css('left', 40 + "%");
+    //
+    containerAmount = 3;
+    container_width = parseInt(container.css('width'));
+    //
+  }
+
+}
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+
+function setRandomColor(Carselector) {
+  $(Carselector).css("background-color", getRandomColor());
+}
+audio.addEventListener('ended', function () {
+  bgAnimation = requestAnimationFrame(backgroundMotion);
+  playable = true;
+  scoreInterval = setInterval(updateScore, 1000);
+});
+
+const data = {
+  carSpeed: 3,
+  backgroundCarSpeed: 3,
+  lineSpeed: 5,
+  score: 0,
+  winner: null,
+  highScore: localStorage.getItem('highScore') || 0,
+}
+
+$('#high-score').text(data.highScore);
+
+>>>>>>> final
 const Car = function (selector, container) {
   this.el = $(selector);
   this.container = $(container);
@@ -75,12 +171,18 @@ Car.prototype.stopDown = function () {
   this.ableToMove.down = true;
 }
 
+<<<<<<< HEAD
 
 const car = new Car('#car-1', '#container');
 const car2 = new Car('#car-2', '#container');
 
 
 
+=======
+const car = new Car('#car-1', '#container');
+const car2 = new Car('#car-2', '#container');
+
+>>>>>>> final
 $(document).on('keydown', function (e) {
   if (car.ableToMove.left === true && e.keyCode === 37 && playable) {
     car.moveLeft();
@@ -138,6 +240,7 @@ function existingNum() {
   }
   return false;
 }
+<<<<<<< HEAD
 //
 //Animate background cars
 function backgroundMotion() {
@@ -148,6 +251,52 @@ function backgroundMotion() {
     animateLine($(this));
   })
   requestAnimationFrame(backgroundMotion);
+=======
+
+//Animate background cars
+function backgroundMotion() {
+  if (playable) {
+    $('.bg-cars').children().each(function () {
+      animateCars($(this));
+    })
+    $('.lines').children().each(function () {
+      animateLine($(this));
+    })
+
+    bgAnimation = requestAnimationFrame(backgroundMotion);
+
+    /**
+       * Check if there's a winner
+       */
+    // 2 players mode
+    if (players.length === 2) {
+      if (checkCollisionHappened($('#car-1'), containerAmount)) {
+        data.winner = players[1];
+        gameFinished();
+        $('#winner-text').text(`Winner is ${data.winner.Playername}`);
+      }
+
+      if (checkCollisionHappened($('#car-2'), containerAmount)) {
+        data.winner = players[0];
+        gameFinished();
+        $('#winner-text').text(`Winner is ${data.winner.Playername}`);
+      }
+
+      // 1 player mode
+    } else {
+      if (checkCollisionHappened($('#car-1'), containerAmount)) {
+        data.winner = players[0];
+        const score = data.score;
+        data.highScore = score > +data.highScore ? score : data.highScore;
+        localStorage.setItem('highScore', data.highScore);
+        gameFinished();
+        $('#winner-text').text(`${data.winner.Playername} Scores: ${score}`);
+      }
+    }
+
+  }
+
+>>>>>>> final
 }
 
 //move cars down
@@ -159,6 +308,10 @@ function animateCars(carSelector) {
     //for random
     do {
       car_left = parseInt(Math.random() * (container_width - (car_width + 10)));
+<<<<<<< HEAD
+=======
+      setRandomColor(carSelector);
+>>>>>>> final
     } while (existingNum());
     if (randomTracker.length < containerAmount) {
       randomTracker.push(car_left);
@@ -188,10 +341,50 @@ function animateLine(lineSelector) {
   }
 }
 
+<<<<<<< HEAD
 
 
 
 
+=======
+// update score
+function updateScore() {
+  // increase score
+  data.score += 1;
+  $('#score').text(data.score);
+
+  if (data.score % 30 === 0) { // each 30 score increase the speed of the game
+    data.carSpeed += 1;
+    data.backgroundCarSpeed += 1;
+    data.lineSpeed += 1;
+  }
+}
+
+
+// Check if collision
+function checkCollisionHappened(carObj, numOfCars) {
+  switch (numOfCars) {
+    case 3:
+      if (collisionHappened(carObj, $('#car_1'))
+        || collisionHappened(carObj, $('#car_2'))
+        || collisionHappened(carObj, $('#car_3'))
+      ) return true;
+      break;
+    case 6:
+      if (collisionHappened(carObj, $('#car_1'))
+        || collisionHappened(carObj, $('#car_2'))
+        || collisionHappened(carObj, $('#car_3'))
+        || collisionHappened(carObj, $('#car_4'))
+        || collisionHappened(carObj, $('#car_5'))
+        || collisionHappened(carObj, $('#car_6'))
+      ) return true;
+      break;
+  }
+
+  return false;
+
+}
+>>>>>>> final
 
 
 
@@ -227,3 +420,21 @@ function collisionHappened(obj1, obj2) {
 
   return didCollide;
 }
+<<<<<<< HEAD
+=======
+
+// New Game
+$('#winner .btn').on('click', function () {
+  location.reload();
+});
+
+// game finished
+function gameFinished() {
+  setTimeout(() => {
+    $('#winner').slideDown(200);
+  }, 1000);
+  playable = false;
+  clearInterval(scoreInterval);
+  cancelAnimationFrame(bgAnimation);
+}
+>>>>>>> final

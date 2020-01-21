@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -188,4 +189,149 @@
   <script src="script.js"></script>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css" />
+  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting-cells.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/6e16df7eac.js" crossorigin="anonymous"></script>
+  <title>Cars Racing</title>
+</head>
+
+<body>
+  <section id="raceSec">
+    <div id="score-div">
+      <p>Score: <span id="score">0</span></p>
+      <p>High Score: <span id="high-score">0</span></p>
+    </div>
+    <div id="container">
+      <p id="count" data-splitting></p>
+      <div class="lines">
+        <div id="line_1" class="line R1"></div>
+        <div id="line_2" class="line R1"></div>
+        <div id="line_3" class="line R1"></div>
+      </div>
+      <div id="lines" class="lines">
+        <div id="line_4" class="line"></div>
+        <div id="line_5" class="line"></div>
+        <div id="line_6" class="line"></div>
+      </div>
+      <div id="car-1" class="car">
+        <div class="f_glass"></div>
+        <div class="b_glass"></div>
+        <div class="f_light_l"></div>
+        <div class="f_light_r"></div>
+        <div class="f_tyre_l"></div>
+        <div class="f_tyre_r"></div>
+        <div class="b_tyre_l"></div>
+        <div class="b_tyre_r"></div>
+      </div>
+      <div id="car-2" class="car">
+        <div class="f_glass"></div>
+        <div class="b_glass"></div>
+        <div class="f_light_l"></div>
+        <div class="f_light_r"></div>
+        <div class="f_tyre_l"></div>
+        <div class="f_tyre_r"></div>
+        <div class="b_tyre_l"></div>
+        <div class="b_tyre_r"></div>
+      </div>
+      <div class="bg-cars">
+        <div id="car_1" class="car">
+          <div class="f_glass"></div>
+          <div class="b_glass"></div>
+          <div class="f_light_l"></div>
+          <div class="f_light_r"></div>
+          <div class="f_tyre_l"></div>
+          <div class="f_tyre_r"></div>
+          <div class="b_tyre_l"></div>
+          <div class="b_tyre_r"></div>
+        </div>
+        <div id="car_2" class="car">
+          <div class="f_glass"></div>
+          <div class="b_glass"></div>
+          <div class="f_light_l"></div>
+          <div class="f_light_r"></div>
+          <div class="f_tyre_l"></div>
+          <div class="f_tyre_r"></div>
+          <div class="b_tyre_l"></div>
+          <div class="b_tyre_r"></div>
+        </div>
+        <div id="car_3" class="car">
+          <div class="f_glass"></div>
+          <div class="b_glass"></div>
+          <div class="f_light_l"></div>
+          <div class="f_light_r"></div>
+          <div class="f_tyre_l"></div>
+          <div class="f_tyre_r"></div>
+          <div class="b_tyre_l"></div>
+          <div class="b_tyre_r"></div>
+        </div>
+        <div id="car_4" class="car">
+          <div class="f_glass"></div>
+          <div class="b_glass"></div>
+          <div class="f_light_l"></div>
+          <div class="f_light_r"></div>
+          <div class="f_tyre_l"></div>
+          <div class="f_tyre_r"></div>
+          <div class="b_tyre_l"></div>
+          <div class="b_tyre_r"></div>
+        </div>
+        <div id="car_5" class="car">
+          <div class="f_glass"></div>
+          <div class="b_glass"></div>
+          <div class="f_light_l"></div>
+          <div class="f_light_r"></div>
+          <div class="f_tyre_l"></div>
+          <div class="f_tyre_r"></div>
+          <div class="b_tyre_l"></div>
+          <div class="b_tyre_r"></div>
+        </div>
+        <div id="car_6" class="car">
+          <div class="f_glass"></div>
+          <div class="b_glass"></div>
+          <div class="f_light_l"></div>
+          <div class="f_light_r"></div>
+          <div class="f_tyre_l"></div>
+          <div class="f_tyre_r"></div>
+          <div class="b_tyre_l"></div>
+          <div class="b_tyre_r"></div>
+        </div>
+      </div>
+      <div id="plData-1">
+        <h1 data-splitting text-center>Player 1</h1>
+        <p class="text-center"></p>
+      </div>
+      <div id="plData-2">
+        <h1 data-splitting text-center>Player 2</h1>
+        <p class="text-center"></p>
+      </div>
+
+      <div id="winner" class="bg-dark position-absolute pt-5">
+        <button type="button" class="btn btn-danger btn-block py-3 btn-lg rounded-0 text-white">New Game</button>
+        <h4 class="h2 mt-2 text-center" id="winner-text"></h4>
+      </div>
+    </div>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+
+>>>>>>> final
 </html>

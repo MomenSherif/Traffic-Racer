@@ -592,4 +592,6 @@ div[id^="car_"]:nth-child(2) .f_light_r {
   right: 0;
   bottom: 0;
   display: none;
+  background-color: #080808b7;
+  z-index: 999;
 }

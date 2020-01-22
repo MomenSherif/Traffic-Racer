@@ -376,10 +376,19 @@ $('#winner .btn').on('click', function () {
 
 // game finished
 function gameFinished() {
+  stopCar(car);
+  stopCar(car2);
   setTimeout(() => {
     $('#winner').slideDown(200);
   }, 1000);
   playable = false;
   clearInterval(scoreInterval);
   cancelAnimationFrame(bgAnimation);
+}
+
+function stopCar(car){
+  car.stopUp();
+  car.stopDown();
+  car.stopLeft();
+  car.stopRight();
 }

@@ -20,7 +20,7 @@ var car_6 = $('#car_6');
 
 if (playersCount === currPlayer) {
   console.log('Hello');
-  $("#raceSec").css('display', 'block');
+  $('#raceSec').css('display', 'block');
   let distance = 3;
   let x = setInterval(function () {
     distance -= 1;
@@ -29,11 +29,10 @@ if (playersCount === currPlayer) {
       $('#count').text('');
       audio.play();
       clearInterval(x);
-
     }
   }, 1000);
   if (playersCount > 1) {
-    $("#container").css('width', 50 + "%");
+    $('#container').css('width', 50 + '%');
     $('#car-2').css('display', 'block');
     //
     container_width = parseInt(container.css('width'));
@@ -47,19 +46,18 @@ if (playersCount === currPlayer) {
     $('.R1').addClass('road');
     for (let i = 0; i < playersCount; i++) {
       $('#car-' + Number(i + 1)).css('background-color', players[i].favColor);
-      $('#plData-' + Number(i + 1)).find('p').text(players[i].Playername);
+      $('#plData-' + Number(i + 1))
+        .find('p')
+        .text(players[i].Playername);
     }
-  }
-  else {
+  } else {
     $('#car-1').css('background-color', players[0].favColor);
     $('#plData-1').find('p').text(players[0].Playername);
-    $("#container").css('left', 40 + "%");
+    $('#container').css('left', 40 + '%');
     //
     containerAmount = 3;
     container_width = parseInt(container.css('width'));
-    //
   }
-
 }
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -70,9 +68,8 @@ function getRandomColor() {
   return color;
 }
 
-
 function setRandomColor(Carselector) {
-  $(Carselector).css("background-color", getRandomColor());
+  $(Carselector).css('background-color', getRandomColor());
 }
 audio.addEventListener('ended', function () {
   bgAnimation = requestAnimationFrame(backgroundMotion);
@@ -87,7 +84,7 @@ const data = {
   score: 0,
   winner: null,
   highScore: localStorage.getItem('highScore') || 0,
-}
+};
 
 $('#high-score').text(data.highScore);
 
@@ -99,57 +96,63 @@ const Car = function (selector, container) {
     left: true,
     right: true,
     up: true,
-    down: true
-  }
-}
+    down: true,
+  };
+};
 
 Car.prototype.moveLeft = function () {
   if (parseInt(this.el.css('left')) > 10) {
     this.el.css('left', `-=${data.carSpeed}`);
     this.ableToMove.left = requestAnimationFrame(this.moveLeft.bind(this));
   }
-}
+};
 
 Car.prototype.stopLeft = function () {
   cancelAnimationFrame(this.ableToMove.left);
   this.ableToMove.left = true;
-}
+};
 
 Car.prototype.moveRight = function () {
-  if (parseInt(this.el.css('left')) < this.container.width() - this.el.width() - 10) {
+  if (
+    parseInt(this.el.css('left')) <
+    this.container.width() - this.el.width() - 10
+  ) {
     this.el.css('left', `+=${data.carSpeed}`);
     this.ableToMove.right = requestAnimationFrame(this.moveRight.bind(this));
   }
-}
+};
 
 Car.prototype.stopRight = function () {
   cancelAnimationFrame(this.ableToMove.right);
   this.ableToMove.right = true;
-}
+};
 
 Car.prototype.moveUp = function () {
   if (parseInt(this.el.css('top')) > 10) {
     this.el.css('top', `-=${data.carSpeed}`);
     this.ableToMove.up = requestAnimationFrame(this.moveUp.bind(this));
   }
-}
+};
 
 Car.prototype.stopUp = function () {
   cancelAnimationFrame(this.ableToMove.up);
   this.ableToMove.up = true;
-}
+};
 
 Car.prototype.moveDown = function () {
-  if (parseInt(this.el.css('top')) < this.container.height() - this.el.height() - 10) {
+  if (
+    parseInt(this.el.css('top')) <
+    this.container.height() - this.el.height() - 10
+  ) {
     this.el.css('top', `+=${data.carSpeed}`);
     this.ableToMove.down = requestAnimationFrame(this.moveDown.bind(this));
   }
-}
+};
 
 Car.prototype.stopDown = function () {
   cancelAnimationFrame(this.ableToMove.down);
   this.ableToMove.down = true;
-}
+};
 
 const car = new Car('#car-1', '#container');
 const car2 = new Car('#car-2', '#container');
@@ -192,21 +195,17 @@ $(document).on('keyup', function (e) {
   } else if (e.keyCode === 83) {
     car2.stopDown();
   }
-
 });
 //for random
 function existingNum() {
   for (var i = 0; i < randomTracker.length; i++) {
     if (randomTracker[i] === car_left) {
       return true;
-    }
-    else {
-
+    } else {
       var res = Math.abs(randomTracker[i] - car_left);
-      if (res < (car_width + 10)) {
+      if (res < car_width + 10) {
         return true;
       }
-
     }
   }
   return false;
@@ -215,18 +214,22 @@ function existingNum() {
 //Animate background cars
 function backgroundMotion() {
   if (playable) {
-    $('.bg-cars').children().each(function () {
-      animateCars($(this));
-    })
-    $('.lines').children().each(function () {
-      animateLine($(this));
-    })
+    $('.bg-cars')
+      .children()
+      .each(function () {
+        animateCars($(this));
+      });
+    $('.lines')
+      .children()
+      .each(function () {
+        animateLine($(this));
+      });
 
     bgAnimation = requestAnimationFrame(backgroundMotion);
 
     /**
-       * Check if there's a winner
-       */
+     * Check if there's a winner
+     */
     // 2 players mode
     if (players.length === 2) {
       if (checkCollisionHappened($('#car-1'), containerAmount)) {
@@ -252,16 +255,14 @@ function backgroundMotion() {
         $('#winner-text').text(`${data.winner.Playername} Scores: ${score}`);
       }
     }
-
   }
-
 }
 
 //move cars down
 function animateCars(carSelector) {
   var carTopPosition = parseInt($(carSelector).css('top'));
 
-  if (carTopPosition > (parseInt($('#container').height()))) {
+  if (carTopPosition > parseInt($('#container').height())) {
     $(carSelector).css('top', -200);
     //for random
     do {
@@ -270,16 +271,14 @@ function animateCars(carSelector) {
     } while (existingNum());
     if (randomTracker.length < containerAmount) {
       randomTracker.push(car_left);
-    }
-    else {
+    } else {
       randomTracker = [];
       randomTracker.push(car_left);
     }
     //
     // var leftPosition = parseInt(Math.random() * (parseInt($('#container').width()) - parseInt($(carSelector).width())));
     $(carSelector).css('left', car_left);
-  }
-  else {
+  } else {
     $(carSelector).css('top', carTopPosition + data.backgroundCarSpeed);
   }
 }
@@ -287,11 +286,9 @@ function animateCars(carSelector) {
 //move line down
 function animateLine(lineSelector) {
   var lineTopPosition = parseInt($(lineSelector).css('top'));
-  if (lineTopPosition > (parseInt($('#container').height()))) {
+  if (lineTopPosition > parseInt($('#container').height())) {
     $(lineSelector).css('top', -200);
-  }
-  else {
-
+  } else {
     $(lineSelector).css('top', lineTopPosition + data.lineSpeed);
   }
 }
@@ -302,39 +299,40 @@ function updateScore() {
   data.score += 1;
   $('#score').text(data.score);
 
-  if (data.score % 30 === 0) { // each 30 score increase the speed of the game
+  if (data.score % 30 === 0) {
+    // each 30 score increase the speed of the game
     data.carSpeed += 1;
     data.backgroundCarSpeed += 1;
     data.lineSpeed += 1;
   }
 }
 
-
 // Check if collision
 function checkCollisionHappened(carObj, numOfCars) {
   switch (numOfCars) {
     case 3:
-      if (collisionHappened(carObj, $('#car_1'))
-        || collisionHappened(carObj, $('#car_2'))
-        || collisionHappened(carObj, $('#car_3'))
-      ) return true;
+      if (
+        collisionHappened(carObj, $('#car_1')) ||
+        collisionHappened(carObj, $('#car_2')) ||
+        collisionHappened(carObj, $('#car_3'))
+      )
+        return true;
       break;
     case 6:
-      if (collisionHappened(carObj, $('#car_1'))
-        || collisionHappened(carObj, $('#car_2'))
-        || collisionHappened(carObj, $('#car_3'))
-        || collisionHappened(carObj, $('#car_4'))
-        || collisionHappened(carObj, $('#car_5'))
-        || collisionHappened(carObj, $('#car_6'))
-      ) return true;
+      if (
+        collisionHappened(carObj, $('#car_1')) ||
+        collisionHappened(carObj, $('#car_2')) ||
+        collisionHappened(carObj, $('#car_3')) ||
+        collisionHappened(carObj, $('#car_4')) ||
+        collisionHappened(carObj, $('#car_5')) ||
+        collisionHappened(carObj, $('#car_6'))
+      )
+        return true;
       break;
   }
 
   return false;
-
 }
-
-
 
 /***************** Collision - Amr *******************/
 
@@ -354,17 +352,13 @@ function collisionHappened(obj1, obj2) {
   let b2 = parseInt(obj2.css('top')) + parseInt(obj2.css('height'));
 
   // top-right corner of the car
-  if (r1 >= l2 && r1 <= r2 && t1 >= t2 && t1 <= b2)
-    didCollide = true;
+  if (r1 >= l2 && r1 <= r2 && t1 >= t2 && t1 <= b2) didCollide = true;
   // top-left corner of the car
-  if (l1 >= l2 && l1 <= r2 && t1 >= t2 && t1 <= b2)
-    didCollide = true;
+  if (l1 >= l2 && l1 <= r2 && t1 >= t2 && t1 <= b2) didCollide = true;
   // bottom-right corner of the car
-  if (r1 >= l2 && r1 <= r2 && b1 >= t2 && b1 <= b2)
-    didCollide = true;
+  if (r1 >= l2 && r1 <= r2 && b1 >= t2 && b1 <= b2) didCollide = true;
   // bottom-left corner of the car
-  if (l1 >= l2 && l1 <= r2 && b1 >= t2 && b1 <= b2)
-    didCollide = true;
+  if (l1 >= l2 && l1 <= r2 && b1 >= t2 && b1 <= b2) didCollide = true;
 
   return didCollide;
 }
@@ -386,7 +380,7 @@ function gameFinished() {
   cancelAnimationFrame(bgAnimation);
 }
 
-function stopCar(car){
+function stopCar(car) {
   car.stopUp();
   car.stopDown();
   car.stopLeft();
